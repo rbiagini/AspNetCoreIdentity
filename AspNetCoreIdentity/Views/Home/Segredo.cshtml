@@ -1,0 +1,25 @@
+﻿@model string
+@using AspNetCoreIdentity.Extensions
+
+@{
+    ViewData["Title"] = "Segredo!";
+}
+<h1>@ViewData["Title"]</h1>
+
+<h3>@Model</h3>
+<p>top secret.</p>
+@{ 
+    if (this.IfClaim("Produtos", "Adicionnar"))
+            {
+                <p>Você está vendo isso porque pode "Adicionar"</p>
+            }   
+}
+
+<div>
+    @Html.ActionLink(linkText: "Secredo", actionName: "Segredo").IfClaimShow(Context, "Produtos", "Adicionar")
+</div>
+
+<br />
+<div>
+    <a href="#" class="btn btn-danger @Html.Raw(value:this.IfClaimShow("Produtos", "Adicionar"))">Excluir</a>
+</div>
